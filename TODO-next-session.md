@@ -418,10 +418,19 @@ read `/var/lib/lightspeed-firstboot.log` for boot 1 (why no audio?). A helper th
 with the password via `expect` is at
 `scratchpad/release-check.sh <ip>` (session-local; trivial to recreate).
 
-**Remaining before publishing:** nothing technical. Scrub LAN IPs/hostname mentions from
-the two notes files, pick a licence, `git init` + commit, create a GitHub release with
-`lightspeed-bridge-8gb-release.img.zst` + its `.sha256` as assets. The private-image
-cleanup (step 2) is still worth doing separately when the new SD card is in.
+**PUBLISHED 2026-09-13:** https://github.com/jonathan-annett/lightspeed-bridge (public, MIT),
+release `v1.0.0` with `lightspeed-bridge-8gb-release.img.zst` + `.sha256` as assets.
+LAN addresses/MAC/hostnames were scrubbed to `<pi-ip>`, `<pi-mac>`, `<wlan-hostname>`
+before the first commit; the real values live only in the router and in this session.
+Personal scrub patterns are in the gitignored `scrub-patterns.txt` (copy to `/tmp` on the
+Pi before a release build). The "private-image cleanup" (old step 2) is OBSOLETE: the
+appliance runs the release, which has no swap file or caches.
+
+**Future release procedure:** change files in the repo → deploy to the dev stick and test →
+boot the appliance-or-dev box, `scp build-release-image.sh lightspeed-firstboot.service
+gain-control.py gain-status-screen.service scrub-patterns.txt <box>:/tmp/` → run the build
+→ copy the archive off (USB stick; network is slow) → `test-card.sh` a card, write, boot-test
+twice → `gh release create vX.Y.Z <zst> <sha256>` → commit.
 
 **Next steps when resuming:**
 0. `sudo ./test-card.sh /dev/diskN` on the suspect card. Expect it to fail. Then restore the
