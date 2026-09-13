@@ -25,12 +25,15 @@ diskutil unmountDisk "$T" >/dev/null
 OFFS="0 1024"; for q in 1 2 3; do OFFS="$OFFS $(( GIB * 1024 * q / 4 ))"; done; OFFS="$OFFS $(( GIB * 1024 - 16 ))"
 TMP="$(mktemp -d)"; trap 'rm -rf "$TMP"' EXIT
 echo "== writing 8 MiB of random data at MiB offsets: $OFFS"
-for o in $OFFS; do dd if=/dev/urandom of="$TMP/w$o" bs=1m count=8 2>/dev/null; dd if="$TMP/w$o" of="$RAW" bs=1m seek="$o" 2>/dev/null; done; sync
-echo "== reading back"; FAIL=0
+for o in $OFFS; do dd if=/dev/urandom of="$TMP/w$o" bs=1m count=8 2>/dev/null; done
+T0=$(date +%s); for o in $OFFS; do dd if="$TMP/w$o" of="$RAW" bs=1m seek="$o" 2>/dev/null; done; sync; T1=$(date +%s)
+N=$(echo $OFFS | wc -w | tr -d ' '); [ $((T1-T0)) -gt 0 ] && echo "   write: ~$(( N * 8 / (T1-T0) )) MB/s ($((N*8)) MiB in $((T1-T0)) s)" || echo "   write: $((N*8)) MiB in under 1 s"
+echo "== reading back"; FAIL=0; T0=$(date +%s)
 for o in $OFFS; do
     dd if="$RAW" of="$TMP/r$o" bs=1m skip="$o" count=8 2>/dev/null
     if cmp -s "$TMP/w$o" "$TMP/r$o"; then echo "  ${o} MiB  OK"; else echo "  ${o} MiB  WRONG DATA"; FAIL=1; fi
 done
+T1=$(date +%s); [ $((T1-T0)) -gt 0 ] && echo "   read: ~$(( N * 8 / (T1-T0) )) MB/s" || echo "   read: $((N*8)) MiB in under 1 s"
 if [ "$FAIL" -eq 1 ]; then
     if cmp -s "$TMP/w0" "$TMP/r0"; then echo "RESULT: the card is BAD — data written to it does not read back."; else echo "RESULT: the card is BAD, and likely FAKE-CAPACITY — writes far into the card corrupted its start."; fi
     exit 1
