@@ -39,7 +39,7 @@ of systemd units.
 | Computer | Raspberry Pi 5 | Also boots and runs on a Pi 3 B+, untested under load |
 | Boot media | 32 GB SD card | Image is 6.6 GiB, so any 8 GB card works |
 | Output | Logitech A50 Lightspeed base station | USB, `046d:0b1c`, powered from the Pi. Mixes in a Bluetooth headset connection natively, which is how comms are overlaid |
-| Input (primary) | Realtek USB-C stereo adapter | `0bda:49dd`, genuinely stereo |
+| Input (primary) | Realtek USB-C stereo adapter | `0bda:49dd`, genuinely stereo. A USB-C dongle plugs into one of the Pi's USB-A ports with a C-to-A cable or adapter; it is an ordinary USB audio class device either way |
 | Input (fallback) | C-Media XLR to USB cable | `08bb:2902`, mono, PCM2902 codec |
 | Gain control | Any USB keyboard or presenter clicker | Tested with a JBQ90PRSNT |
 
