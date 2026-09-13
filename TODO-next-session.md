@@ -255,7 +255,18 @@ generated **both** `initramfs_2712` and `initramfs8`. The firmware selects the m
 pair per board. Nothing special was done to achieve this; do not break it by pruning
 "unused" kernels or initramfs images.
 
-**Blocking question before adopting it — NOT YET TESTED under load:**
+**2026-09-13 — TESTED: the release image (v1.0.0, on the USB stick first-booted on the Pi 5)
+runs on the Pi 3 B+ at quantum 64 with 0 xruns over 60 s of audio**, Ethernet plugged in
+and sharing the single USB 2.0 controller with both audio devices. Firmware picked
+`6.18.34+rpt-rpi-v8` unaided. Busiest node ~50 µs of the 1333 µs period (~4%); pipewire
+~8% of a core, wireplumber 1%, gain daemon 2%; 44.5 °C; `throttled=0x0`; `FF 88`; 0 monitor
+links, 8 bridge links; A50 and source at unity; 905 MB RAM is plenty. A fresh first boot on
+the 3 B+ (own host keys) is being tested next. A longer soak on the 3 B+ would still be worth
+doing before trusting it at a venue. The case question remains. **On the 3 B+ the base
+station was on its OWN power supply** — and must be: the 3 B+ caps USB at 1.2 A total, and
+the base draws ~1.1 A while charging the headset (measured on the Pi 5).
+
+**The original blocking question (kept for context):**
 
 The Pi 3 B+ runs **all four USB ports AND Ethernet through a single USB 2.0 controller**
 (LAN7515). The Pi 5 has separate, faster controllers. Bandwidth is not the issue

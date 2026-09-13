@@ -250,9 +250,13 @@ to log in on the console.
 
 The image carries both the Pi 5 kernel and the Pi 3 and 4 kernel with matching
 initramfs images, and the firmware selects the right pair. A Pi 3 B+ boots it
-in 25 seconds. Its USB and Ethernet share one USB 2.0 controller, so run it
-with audio for several minutes and watch for xruns with `pw-top`. If they
-appear, raise `default.clock.quantum` in `latency.conf` to 128, then 256.
+in 25 seconds. Its USB and Ethernet share one USB 2.0 controller, but in
+testing it held the same 64-sample quantum with no xruns over a minute of
+audio with Ethernet connected. If xruns ever appear on it, raise
+`default.clock.quantum` in `latency.conf` to 128, then 256. One rule on that
+board: power the base station from its own supply. The 3 B+ allows 1.2 A
+across all its USB ports, and the base station draws about 1.1 A while
+charging the headset.
 
 ## Advanced and development
 
