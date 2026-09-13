@@ -27,7 +27,7 @@ TMP="$(mktemp -d)"; trap 'rm -rf "$TMP"' EXIT
 echo "== writing 8 MiB of random data at MiB offsets: $OFFS"
 for o in $OFFS; do dd if=/dev/urandom of="$TMP/w$o" bs=1m count=8 2>/dev/null; done
 T0=$(date +%s); for o in $OFFS; do dd if="$TMP/w$o" of="$RAW" bs=1m seek="$o" 2>/dev/null; done; sync; T1=$(date +%s)
-N=$(echo $OFFS | wc -w | tr -d ' '); [ $((T1-T0)) -gt 0 ] && echo "   write: ~$(( N * 8 / (T1-T0) )) MB/s ($((N*8)) MiB in $((T1-T0)) s)" || echo "   write: $((N*8)) MiB in under 1 s"
+N=$(echo $OFFS | wc -w | tr -d ' '); [ $((T1-T0)) -gt 0 ] && echo "   write: ~$(( N * 8 / (T1-T0) )) MB/s scattered ($((N*8)) MiB in $((T1-T0)) s; sequential writes are much faster)" || echo "   write: $((N*8)) MiB in under 1 s"
 echo "== reading back"; FAIL=0; T0=$(date +%s)
 for o in $OFFS; do
     dd if="$RAW" of="$TMP/r$o" bs=1m skip="$o" count=8 2>/dev/null
