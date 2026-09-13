@@ -1,0 +1,27 @@
+# Install as /etc/systemd/system/gain-status-screen.service ; systemctl enable gain-status-screen
+#
+# Diagnostic status screen on virtual console 2 (tty1 keeps its login prompt; Alt+F1).
+# Follows the gain-control daemon, pipewire/wireplumber, sshd, NetworkManager and the
+# first-boot unit from the volatile journal, so plugging an HDMI screen in at any time
+# shows what the box is doing, its IP address, and whether SSH is up.
+[Unit]
+Description=Bridge status screen on tty2
+After=systemd-user-sessions.service
+ConditionPathExists=/dev/tty2
+
+[Service]
+ExecStartPre=/usr/bin/chvt 2
+# NOTE: --user-unit= does not match here (it also filters on the caller's UID); use the raw field.
+# Also follows sshd and NetworkManager: a plugged-in monitor then shows the box's DHCP
+# address and whether SSH is listening — the two things you need when it will not answer.
+ExecStart=/usr/bin/journalctl -D /run/log/journal -f -n 40 -o short-monotonic _SYSTEMD_USER_UNIT=gain-control.service + _SYSTEMD_USER_UNIT=wireplumber.service + _SYSTEMD_USER_UNIT=pipewire.service + _SYSTEMD_UNIT=ssh.service + _SYSTEMD_UNIT=NetworkManager.service + _SYSTEMD_UNIT=lightspeed-firstboot.service
+StandardOutput=tty
+TTYPath=/dev/tty2
+TTYReset=yes
+TTYVHangup=yes
+TTYVTDisallocate=yes
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

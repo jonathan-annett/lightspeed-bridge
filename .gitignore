@@ -1,0 +1,9 @@
+# Disk images: multi-GB binaries, publish as release assets instead
+*.img
+*.img.zst
+# Logs from restore runs (contain local device paths)
+restore-*.log
+__pycache__/
+.DS_Store
+# personal scrub patterns for the release build
+scrub-patterns.txt

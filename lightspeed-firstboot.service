@@ -1,0 +1,22 @@
+# Ships in the RELEASE image only, as /etc/systemd/system/lightspeed-firstboot.service (enabled).
+#
+# The release image boots once with the read-only overlay OFF so that this boot can persist
+# changes: it generates unique SSH host keys itself (ssh-keygen -A; the OS's own
+# regenerate_ssh_host_keys.service has first-boot conditions we do not rely on), restarts
+# sshd, then switches the overlay on and reboots. From the second boot the box is the
+# finished appliance. No login is needed at any point.
+# The first boot's full journal is saved to /var/lib/lightspeed-firstboot.log (after a
+# 20 s settle so the audio session is in it) because that boot's journal is otherwise
+# gone after the self-reboot — it is the only way to debug first-boot-only behaviour.
+[Unit]
+Description=Lightspeed first boot: enable the read-only overlay and reboot
+After=multi-user.target regenerate_ssh_host_keys.service systemd-machine-id-commit.service
+ConditionPathExists=!/var/lib/lightspeed-firstboot-done
+ConditionKernelCommandLine=!overlayroot=tmpfs
+
+[Service]
+Type=oneshot
+ExecStart=/bin/sh -c 'echo "lightspeed: first boot — generating SSH host keys, enabling read-only overlay, rebooting" | tee /dev/tty1; ssh-keygen -A; systemctl restart ssh; touch /var/lib/lightspeed-firstboot-done; sleep 20; journalctl -b -o short-monotonic > /var/lib/lightspeed-firstboot.log; sync; raspi-config nonint enable_overlayfs; sync; systemctl reboot'
+
+[Install]
+WantedBy=multi-user.target

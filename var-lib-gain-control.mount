@@ -1,0 +1,25 @@
+# Install as /etc/systemd/system/var-lib-gain\x2dcontrol.mount  (note the \x2d — the unit
+# name must be the escaped mount path) ; systemctl enable var-lib-gain\x2dcontrol.mount
+#
+# 64 MiB ext4 partition (label gaindata, /dev/mmcblk0p3, created 2026-09-12 in the free
+# space after rootfs) holding the clicker gain daemon's persisted offset.
+# A systemd mount unit rather than fstab because overlayroot recurses into every ext4
+# fstab entry, mounts it read-only under /media/root-ro and overlays it — the writes
+# would then be discarded at reboot, which is the exact opposite of the point.
+# sync + data=journal: tiny, rare writes; the box has its power pulled without shutdown.
+[Unit]
+Description=Persistent data for gain-control (clicker offset)
+DefaultDependencies=no
+After=systemd-fsck@dev-disk-by\x2dlabel-gaindata.service
+Before=local-fs.target
+Conflicts=umount.target
+
+[Mount]
+What=/dev/disk/by-label/gaindata
+Where=/var/lib/gain-control
+Type=ext4
+Options=noatime,sync,data=journal
+TimeoutSec=10
+
+[Install]
+WantedBy=local-fs.target

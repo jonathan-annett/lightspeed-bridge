@@ -1,0 +1,13 @@
+# Install as ~/.config/systemd/user/gain-control.service ; systemctl --user enable gain-control
+[Unit]
+Description=Bridge input gain control (USB keyboard / presenter clicker)
+After=pipewire.service wireplumber.service
+Wants=pipewire.service
+
+[Service]
+ExecStart=%h/.local/bin/gain-control.py
+Restart=always
+RestartSec=2
+
+[Install]
+WantedBy=default.target
