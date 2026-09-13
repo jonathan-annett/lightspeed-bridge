@@ -254,7 +254,7 @@ picks the right one for the board, so one image serves several models.
 | Board | Status | Notes |
 |---|---|---|
 | Raspberry Pi 5 | Tested, the reference | With the official 27 W supply it can power the base station too |
-| Raspberry Pi 3 B+ | Tested | Same image, same 64-sample quantum, no xruns with Ethernet on the shared USB 2.0 controller. Boots in 25 s. About half the price of a Pi 5, so the sensible choice for a dedicated box |
+| Raspberry Pi 3 B+ | Tested | Same image, same 64-sample quantum, no xruns with Ethernet on the shared USB 2.0 controller. Boots in 25 s from an SD card, but 57 s from a USB stick, because this board's bootloader probes USB slowly: use an SD card on it. About half the price of a Pi 5, so the sensible choice for a dedicated box |
 | Raspberry Pi 4 | Expected to work, untested | Same kernel as the 3 B+, faster, better USB layout |
 | Raspberry Pi Zero 2 W | Boots the same kernel, untested, not recommended | One USB port, so it needs a powered hub, which costs about the difference to a 3 B+ |
 | Pi Zero, Pi 1, Pi 2 | Will not work | 32-bit boards; the image is 64-bit only |
