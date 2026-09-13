@@ -218,7 +218,7 @@ Verify: `pw-cli enum-params <A50 sink id> Props | grep -A3 softVolumes` → `1.0
 | A50 hot-plugged / enumerates late | ✅ sink at unity every time (3 boots × 2 hot-plugs) |
 | Clicker gain control | ✅ ±3/±1 dB steps, clamps, reset; keys never reach the console (grabbed) |
 | Pi 5 power button | ✅ left to logind — the daemon only grabs devices that offer a mapped key |
-| Pi 3 B+ with the same image (2026-09-13) | ✅ quantum 64 held, 0 xruns / 60 s with Ethernet on the shared USB 2.0 controller; busiest node ~4% of period; 44.5 °C; no under-voltage |
+| Pi 3 B+ with the same image (2026-09-13) | ✅ quantum 64 held, 0 xruns / 60 s with Ethernet on the shared USB 2.0 controller; busiest node ~4% of period; 44.5 °C; no under-voltage. Fresh first boot on the 3 B+ also ✅ (own host key, overlay enabled, v8 kernel) |
 | Overnight soak (2026-09-12→13, looped track, USB-stick boot) | ✅ still playing in the morning after the headset had powered itself off and back on; `throttled=0x0`, 51.6 °C, **0 xruns over 90 s idle**. (The session's cumulative 79 xruns all accrued while four release-image builds ran on the same box — not representative of venue use.) |
 
 **Output recovers faster than input** because the A50 is bound by exact `target.object`

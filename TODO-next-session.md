@@ -260,8 +260,11 @@ runs on the Pi 3 B+ at quantum 64 with 0 xruns over 60 s of audio**, Ethernet pl
 and sharing the single USB 2.0 controller with both audio devices. Firmware picked
 `6.18.34+rpt-rpi-v8` unaided. Busiest node ~50 µs of the 1333 µs period (~4%); pipewire
 ~8% of a core, wireplumber 1%, gain daemon 2%; 44.5 °C; `throttled=0x0`; `FF 88`; 0 monitor
-links, 8 bridge links; A50 and source at unity; 905 MB RAM is plenty. A fresh first boot on
-the 3 B+ (own host keys) is being tested next. A longer soak on the 3 B+ would still be worth
+links, 8 bridge links; A50 and source at unity; 905 MB RAM is plenty. **A fresh first boot on the
+3 B+ (new 64 GB USB stick, 2026-09-13 ~12:15) PASSED:** own host key, overlay enabled by
+the first-boot unit on that board, v8 kernel from boot 1, 0 xruns / 60 s, gain step +
+reset persisted, 50.5 °C, throttled 0x0. The 3 B+ is now a supported board (README
+"Which Raspberry Pi"). A longer soak on the 3 B+ would still be worth
 doing before trusting it at a venue. The case question remains. **On the 3 B+ the base
 station was on its OWN power supply** — and must be: the 3 B+ caps USB at 1.2 A total, and
 the base draws ~1.1 A while charging the headset (measured on the Pi 5).

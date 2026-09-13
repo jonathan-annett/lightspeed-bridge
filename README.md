@@ -246,17 +246,28 @@ login prompt. A full keyboard, one with letter keys, is read but not grabbed:
 its Page, arrow and volume keys still steer the gain, and it can still be used
 to log in on the console.
 
-### A different Raspberry Pi
+### Which Raspberry Pi
 
-The image carries both the Pi 5 kernel and the Pi 3 and 4 kernel with matching
-initramfs images, and the firmware selects the right pair. A Pi 3 B+ boots it
-in 25 seconds. Its USB and Ethernet share one USB 2.0 controller, but in
-testing it held the same 64-sample quantum with no xruns over a minute of
-audio with Ethernet connected. If xruns ever appear on it, raise
-`default.clock.quantum` in `latency.conf` to 128, then 256. One rule on that
-board: power the base station from its own supply. The 3 B+ allows 1.2 A
-across all its USB ports, and the base station draws about 1.1 A while
-charging the headset.
+The image carries both 64-bit kernels Raspberry Pi OS ships, and the firmware
+picks the right one for the board, so one image serves several models.
+
+| Board | Status | Notes |
+|---|---|---|
+| Raspberry Pi 5 | Tested, the reference | With the official 27 W supply it can power the base station too |
+| Raspberry Pi 3 B+ | Tested | Same image, same 64-sample quantum, no xruns with Ethernet on the shared USB 2.0 controller. Boots in 25 s. About half the price of a Pi 5, so the sensible choice for a dedicated box |
+| Raspberry Pi 4 | Expected to work, untested | Same kernel as the 3 B+, faster, better USB layout |
+| Raspberry Pi Zero 2 W | Boots the same kernel, untested, not recommended | One USB port, so it needs a powered hub, which costs about the difference to a 3 B+ |
+| Pi Zero, Pi 1, Pi 2 | Will not work | 32-bit boards; the image is 64-bit only |
+| Other boards (Orange Pi and similar on Armbian) | Image will not boot | The configuration above the OS is portable, the image is not: it carries Raspberry Pi firmware, kernels and first-boot tooling |
+
+**Power the base station from its own supply on anything but a Pi 5.** The
+3 B+ and 4 allow 1.2 A across all their USB ports, and the base station
+draws about 1.1 A while charging the headset. The supply it needs comes in
+the box with it. On a Pi 5 with the official supply the base station can
+share the Pi's power, which is a convenience, not a saving.
+
+If xruns ever appear on a slower board, raise `default.clock.quantum` in
+`latency.conf` to 128, then 256.
 
 ## Advanced and development
 
