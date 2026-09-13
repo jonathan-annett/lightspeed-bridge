@@ -23,22 +23,23 @@
   <text x="20" y="48" class="s">Solid = wired · blue = wireless</text>
 
   <!-- row 1: desk -> capture -->
-  <rect x="20" y="80" width="170" height="70" class="box"/>
+  <rect x="20" y="80" width="170" height="84" class="box"/>
   <text x="105" y="107" text-anchor="middle" class="t" font-weight="600">Mixing desk</text>
-  <text x="105" y="125" text-anchor="middle" class="s">PFL / monitor / line out</text>
-  <text x="105" y="140" text-anchor="middle" class="s">(TRS, XLR or 3.5 mm)</text>
+  <text x="105" y="127" text-anchor="middle" class="s">PFL / monitor / line out</text>
+  <text x="105" y="143" text-anchor="middle" class="s">(TRS, XLR or 3.5 mm)</text>
 
-  <rect x="330" y="80" width="170" height="70" class="box"/>
-  <text x="415" y="107" text-anchor="middle" class="t" font-weight="600">USB audio card</text>
-  <text x="415" y="125" text-anchor="middle" class="s">any USB capture device: a stereo</text>
-  <text x="415" y="140" text-anchor="middle" class="s">dongle or a mono XLR-to-USB cable</text>
+  <rect x="330" y="80" width="170" height="84" class="box"/>
+  <text x="415" y="105" text-anchor="middle" class="t" font-weight="600">USB audio card</text>
+  <text x="415" y="123" text-anchor="middle" class="s">any USB capture device:</text>
+  <text x="415" y="138" text-anchor="middle" class="s">a stereo dongle, or</text>
+  <text x="415" y="153" text-anchor="middle" class="s">a mono XLR-to-USB cable</text>
 
-  <line x1="190" y1="115" x2="329" y2="115" class="w"/>
-  <text x="260" y="106" text-anchor="middle" class="l">analog audio</text>
+  <line x1="190" y1="122" x2="329" y2="122" class="w"/>
+  <text x="260" y="113" text-anchor="middle" class="l">analog audio</text>
 
   <!-- capture -> pi (down) -->
-  <line x1="415" y1="150" x2="415" y2="209" class="w"/>
-  <text x="425" y="184" class="l">USB</text>
+  <line x1="415" y1="164" x2="415" y2="209" class="w"/>
+  <text x="425" y="191" class="l">USB</text>
 
   <!-- row 2: pi -> base -> headset -->
   <rect x="330" y="210" width="170" height="100" class="pi"/>
