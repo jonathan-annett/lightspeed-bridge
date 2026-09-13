@@ -267,7 +267,9 @@ reset persisted, 50.5 °C, throttled 0x0. The 3 B+ is now a supported board (REA
 "Which Raspberry Pi"). **Power-on → audio on the 3 B+: 57 s from the USB stick** vs 25 s
 from an SD card measured earlier — the 3 B+ bootloader's USB probing is slow; use SD on it. A longer soak on the 3 B+ would still be worth
 doing before trusting it at a venue. The case question remains. **On the 3 B+ the base
-station was on its OWN power supply** — and must be: the 3 B+ caps USB at 1.2 A total, and
+station was on its OWN power supply** — and must be (the user confirmed it does run from a
+3 B+ port when not charging, ~0.27 A; the failure mode is the Pi browning out when the
+headset docks): the 3 B+ caps USB at 1.2 A total, and
 the base draws ~1.1 A while charging the headset (measured on the Pi 5).
 
 **The original blocking question (kept for context):**

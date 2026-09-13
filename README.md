@@ -263,8 +263,11 @@ picks the right one for the board, so one image serves several models.
 **Power the base station from its own supply on anything but a Pi 5.** The
 3 B+ and 4 allow 1.2 A across all their USB ports, and the base station
 draws about 1.1 A while charging the headset. The supply it needs comes in
-the box with it. On a Pi 5 with the official supply the base station can
-share the Pi's power, which is a convenience, not a saving.
+the box with it. The base station does run from a 3 B+ port while it is only
+passing audio, at about 0.27 A, so it will appear to work; what fails is the
+Pi, browning out the moment the headset docks to charge. On a Pi 5 with the
+official supply the base station can share the Pi's power, which is a
+convenience, not a saving.
 
 If xruns ever appear on a slower board, raise `default.clock.quantum` in
 `latency.conf` to 128, then 256.
