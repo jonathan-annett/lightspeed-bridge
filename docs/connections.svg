@@ -29,9 +29,9 @@
   <text x="105" y="140" text-anchor="middle" class="s">(TRS, XLR or 3.5 mm)</text>
 
   <rect x="330" y="80" width="170" height="70" class="box"/>
-  <text x="415" y="107" text-anchor="middle" class="t" font-weight="600">USB capture device</text>
-  <text x="415" y="125" text-anchor="middle" class="s">stereo USB-C adapter, or</text>
-  <text x="415" y="140" text-anchor="middle" class="s">mono XLR-to-USB cable</text>
+  <text x="415" y="107" text-anchor="middle" class="t" font-weight="600">USB audio card</text>
+  <text x="415" y="125" text-anchor="middle" class="s">any USB capture device: a stereo</text>
+  <text x="415" y="140" text-anchor="middle" class="s">dongle or a mono XLR-to-USB cable</text>
 
   <line x1="190" y1="115" x2="329" y2="115" class="w"/>
   <text x="260" y="106" text-anchor="middle" class="l">analog audio</text>

@@ -51,7 +51,7 @@ advertises 5 A.
 
 ## How it connects
 
-![Basic setup: mixing desk PFL into a USB capture device, into the Raspberry Pi, USB audio and power out to the A50 base station, Lightspeed radio to the headset; a phone or comms unit joins over Bluetooth at the base station; one 5 A USB-C supply powers everything](docs/connections.svg)
+![Basic setup: mixing desk PFL into a USB audio card, into the Raspberry Pi, USB audio and power out to the A50 base station, Lightspeed radio to the headset; a phone or comms unit joins over Bluetooth at the base station; one 5 A USB-C supply powers everything](docs/connections.svg)
 
 That is the whole basic setup. Power on, wait about 20 seconds, listen.
 Everything else on this page is either how it works inside or optional.
