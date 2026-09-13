@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1060" height="490" viewBox="0 0 1060 490" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="13">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#555"/>
+    </marker>
+    <marker id="arr2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#2b6cb0"/>
+    </marker>
+    <style>
+      .box { fill:#fff; stroke:#444; stroke-width:1.5; rx:8; }
+      .pi  { fill:#fdf6e3; stroke:#b7791f; stroke-width:2; rx:8; }
+      .t   { fill:#222; }
+      .s   { fill:#555; font-size:11.5px; }
+      .l   { fill:#333; font-size:12px; }
+      .w   { stroke:#555; stroke-width:1.8; fill:none; marker-end:url(#arr); }
+      .bt  { stroke:#2b6cb0; stroke-width:1.8; fill:none; stroke-dasharray:6 4; marker-end:url(#arr2); }
+      .rf  { stroke:#2b6cb0; stroke-width:1.8; fill:none; marker-end:url(#arr2); }
+      .pw  { stroke:#b7791f; stroke-width:1.8; fill:none; marker-end:url(#arr); }
+    </style>
+  </defs>
+  <rect width="1060" height="490" fill="#ffffff"/>
+  <text x="20" y="28" font-size="17" font-weight="600" class="t">Lightspeed USB Audio Bridge — basic setup</text>
+  <text x="20" y="48" class="s">Solid = wired · blue = wireless</text>
+
+  <!-- row 1: desk -> capture -->
+  <rect x="20" y="80" width="170" height="70" class="box"/>
+  <text x="105" y="107" text-anchor="middle" class="t" font-weight="600">Mixing desk</text>
+  <text x="105" y="125" text-anchor="middle" class="s">PFL / monitor / line out</text>
+  <text x="105" y="140" text-anchor="middle" class="s">(TRS, XLR or 3.5 mm)</text>
+
+  <rect x="330" y="80" width="170" height="70" class="box"/>
+  <text x="415" y="107" text-anchor="middle" class="t" font-weight="600">USB capture device</text>
+  <text x="415" y="125" text-anchor="middle" class="s">stereo USB-C adapter, or</text>
+  <text x="415" y="140" text-anchor="middle" class="s">mono XLR-to-USB cable</text>
+
+  <line x1="190" y1="115" x2="329" y2="115" class="w"/>
+  <text x="260" y="106" text-anchor="middle" class="l">analog audio</text>
+
+  <!-- capture -> pi (down) -->
+  <line x1="415" y1="150" x2="415" y2="209" class="w"/>
+  <text x="425" y="184" class="l">USB</text>
+
+  <!-- row 2: pi -> base -> headset -->
+  <rect x="330" y="210" width="170" height="100" class="pi"/>
+  <text x="415" y="238" text-anchor="middle" class="t" font-weight="600">Raspberry Pi 5</text>
+  <text x="415" y="256" text-anchor="middle" class="s">this project's image</text>
+  <text x="415" y="271" text-anchor="middle" class="s">no screen, no login,</text>
+  <text x="415" y="286" text-anchor="middle" class="s">no network needed</text>
+  <text x="415" y="301" text-anchor="middle" class="s">boots to audio in ~20 s</text>
+
+  <rect x="660" y="225" width="170" height="70" class="box"/>
+  <text x="745" y="252" text-anchor="middle" class="t" font-weight="600">A50 base station</text>
+  <text x="745" y="270" text-anchor="middle" class="s">USB audio + charging dock</text>
+  <text x="745" y="285" text-anchor="middle" class="s">mixes Lightspeed + Bluetooth</text>
+
+  <rect x="920" y="225" width="120" height="70" class="box"/>
+  <text x="980" y="252" text-anchor="middle" class="t" font-weight="600">A50 headset</text>
+  <text x="980" y="270" text-anchor="middle" class="s">PFL and comms</text>
+  <text x="980" y="285" text-anchor="middle" class="s">in one headset</text>
+
+  <line x1="500" y1="260" x2="659" y2="260" class="w"/>
+  <text x="580" y="250" text-anchor="middle" class="l">USB audio + power</text>
+
+  <line x1="830" y1="260" x2="919" y2="260" class="rf"/>
+  <text x="875" y="246" text-anchor="middle" class="l" fill="#2b6cb0">Lightspeed</text>
+  <text x="875" y="278" text-anchor="middle" class="s" fill="#2b6cb0">2.4 GHz</text>
+
+  <!-- row 3: power under pi, phone under base -->
+  <rect x="330" y="380" width="170" height="60" class="pi"/>
+  <text x="415" y="404" text-anchor="middle" class="t" font-weight="600">5 A USB-C power supply</text>
+  <text x="415" y="422" text-anchor="middle" class="s">one supply runs everything</text>
+  <line x1="415" y1="379" x2="415" y2="311" class="pw"/>
+  <text x="425" y="350" class="l" fill="#b7791f">power</text>
+
+  <rect x="660" y="380" width="170" height="60" class="box"/>
+  <text x="745" y="404" text-anchor="middle" class="t" font-weight="600">Phone / comms unit</text>
+  <text x="745" y="422" text-anchor="middle" class="s">intercom, talkback</text>
+  <line x1="745" y1="379" x2="745" y2="296" class="bt"/>
+  <text x="755" y="342" class="l" fill="#2b6cb0">Bluetooth</text>
+
+  <text x="20" y="475" class="s">Power on, wait about 20 seconds, listen. Pull the power when done.</text>
+</svg>

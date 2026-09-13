@@ -49,13 +49,14 @@ the headset. That charging load exceeds the USB budget the Pi 5 allows itself
 when it cannot identify a 5 A supply, so use the official supply or one that
 advertises 5 A.
 
-## How it works
+## How it connects
 
-```
-desk PFL out -> USB capture device -> PipeWire loopback -> A50 base station -> headset
-                  (ALSA source)         (audio_bridge_*)      (ALSA sink)        ^
-                                                    intercom via Bluetooth -----+
-```
+![Basic setup: mixing desk PFL into a USB capture device, into the Raspberry Pi, USB audio and power out to the A50 base station, Lightspeed radio to the headset; a phone or comms unit joins over Bluetooth at the base station; one 5 A USB-C supply powers everything](docs/connections.svg)
+
+That is the whole basic setup. Power on, wait about 20 seconds, listen.
+Everything else on this page is either how it works inside or optional.
+
+## How it works
 
 - **PipeWire** runs as the user at boot (linger enabled) with a quantum of 64
   samples at 48 kHz. Both USB devices are native 48 kHz, so nothing is resampled.
@@ -252,6 +253,31 @@ initramfs images, and the firmware selects the right pair. A Pi 3 B+ boots it
 in 25 seconds. Its USB and Ethernet share one USB 2.0 controller, so run it
 with audio for several minutes and watch for xruns with `pw-top`. If they
 appear, raise `default.clock.quantum` in `latency.conf` to 128, then 256.
+
+## Advanced and development
+
+None of this is needed for normal use. It is what the box offers when you
+plug more into it.
+
+- **Presenter clicker or USB keyboard.** Plug one into any USB port, at boot or
+  later, and it adjusts the input gain live: Page Down and Page Up step 3 dB,
+  the volume keys and arrow keys step 1 dB, and the period key, which
+  clickers send for "blank screen", resets to the boot default. The last
+  setting survives a power cycle. Details under customising.
+- **Ethernet.** Plug in a cable and the box takes a DHCP address and accepts
+  SSH as `lightspeedpi`. Nothing on the box needs the network, and it never
+  waits for one at boot.
+- **HDMI monitor.** A screen shows a live status console on virtual terminal
+  2: the gain daemon, PipeWire and WirePlumber, the SSH server and the
+  network, so you can see the address it took and whether SSH is up. Alt+F1
+  gets the ordinary login prompt.
+- **Second wired output.** The capture adapter's own headphone jack could
+  carry the same audio for a second listener. It is assessed but not built;
+  the notes in `TODO-next-session.md` describe how, and the one trap to
+  avoid.
+- **Development.** Keep a second boot medium with your own SSH key on it and
+  do experiments there. The appliance itself only ever runs a release image,
+  built from the running system by `build-release-image.sh`.
 
 ## Operating and verifying
 
