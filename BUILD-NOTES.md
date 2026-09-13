@@ -41,6 +41,7 @@ bootloader to load.
 |---|---|---|---|---|
 | **32 GB SD card** ← **CHOSEN** | **20 s** | flush, transit-safe | 17 MB/s (~17 min) | **−7 s / −26% vs baseline** |
 | Original USB stick (16 GB) | 27 s | protrudes — can stress board in transit | 23.5 MB/s read | baseline, 2 runs |
+| Pi 3 B+ from a 64 GB USB stick (2026-09-13) | 57 s | | 48 MB/s read | the 3 B+ bootloader probes USB slowly; SD on that board was 25 s |
 | "VendorCo" USB (16 GB) | 31 s | flush, transit-safe | 7.86 MB/s (~33 min) | slow flash |
 
 **The SD card wins on both criteria — fastest AND flush-fitting.** No trade-off.
